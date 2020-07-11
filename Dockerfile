@@ -20,4 +20,4 @@ RUN wget https://downloads.apache.org/tomcat/tomcat-8/v8.5.56/bin/apache-tomcat-
 
 RUN tar -xvzf apache-tomcat-8.5.56.tar.gz
 
-ADD dist/hello-world.war /usr/bin/local/tomcat/apache-tomcat-8.5.56/webapps
+ADD $APP_DIR/hello-world.war /usr/bin/local/tomcat/apache-tomcat-8.5.56/webapps
