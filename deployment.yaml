@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,6 +17,19 @@ spec:
     spec:
       containers:
       - name: tomcat
-        image: microservicespoc.azurecr.io/helloworld-wimage:21
+        image: microservicespoc.azurecr.io/helloworld-wimage:#{Build.Buildid}#
         ports:
         - containerPort: 8080
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: tomcat-service
+spec:
+  selector:
+    app: tomcat
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
