@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tomcat-deployment
+  namespace: microservices-poc
   labels:
     app: tomcat
 spec:
@@ -16,8 +17,9 @@ spec:
         app: tomcat
     spec:
       containers:
-      - name: tomcat
-        image: microservicespoc.azurecr.io/helloworld-wimage:#{Build.Buildid}#
+      - name: tomcat-app
+        image: microservicespoc.azurecr.io/helloworld-wimage:#{Build.BuildId}#
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
 
@@ -31,5 +33,5 @@ spec:
     app: tomcat
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 8080
+    port: 8080
+  type: LoadBalancer
